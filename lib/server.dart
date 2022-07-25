@@ -48,7 +48,10 @@ abstract class BaseController {
     for (final middleware in middlewares) {
       pipeline = pipeline.addMiddleware(middleware);
     }
-    pipeline = pipeline.addMiddleware(CustomMiddlerwares.jsonMiddleware);
+    pipeline = pipeline
+        .addMiddleware(CustomMiddlerwares.jsonMiddleware)
+        .addMiddleware(logRequests());
+
     return pipeline.addHandler(route);
   }
 }
